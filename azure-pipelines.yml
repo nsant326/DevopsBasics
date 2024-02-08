@@ -10,16 +10,28 @@ pool:
   vmImage: 'ubuntu-latest' 
 
 steps:
+- task: SonarQubePrepare@5
+  inputs:
+    SonarQube: 'My_Sonarqube'
+    scannerMode: 'Other'
+- task: JavaToolInstaller@0
+  inputs:
+    versionSpec: '11'
+    jdkArchitectureOption: 'x64'
+    jdkSourceOption: 'PreInstalled'
 - task: Maven@3
   inputs:
     mavenPomFile: 'pom.xml'
-    mavenOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
+    goals: 'package sonar:sonar'
     publishJUnitResults: true
     testResultsFiles: '**/surefire-reports/TEST-*.xml'
-    goals: 'package'
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.8'
+    mavenVersionOption: 'Default'
+    mavenOptions: '-Xmx3072m'
+    mavenAuthenticateFeed: false
+    effectivePomSkip: false
+    sonarQubeRunAnalysis: false
 - task: CopyFiles@2
   inputs:
     Contents: '**/*.war'
