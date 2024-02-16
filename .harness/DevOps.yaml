@@ -33,3 +33,21 @@ pipeline:
                   spec:
                     shell: Sh
                     command: mvn clean install
+              - step:
+                  type: S3Upload
+                  name: S3Upload_1
+                  identifier: S3Upload_1
+                  spec:
+                    connectorRef: awsconnector
+                    region: eu-north-1
+                    bucket: aws32s3bucket
+                    sourcePath: /harness/target/webapp-1.war
+            "":
+              type: S3Upload
+              name: S3Upload_1
+              identifier: S3Upload_1
+              spec:
+                connectorRef: awsconnector
+                region: us-east-1
+                bucket: aws32s3bucket
+                sourcePath: /harness/target/webapp-1.war
