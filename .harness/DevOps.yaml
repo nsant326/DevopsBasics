@@ -40,7 +40,7 @@ pipeline:
                   spec:
                     connectorRef: awsconnector
                     region: eu-north-1
-                    bucket: aws32s3bucket
+                    bucket: aws32bucket1
                     sourcePath: /harness/target/webapp-1.war
             "":
               type: S3Upload
