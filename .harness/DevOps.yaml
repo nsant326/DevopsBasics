@@ -33,10 +33,3 @@ pipeline:
                   spec:
                     shell: Sh
                     command: mvn clean install
-              - step:
-                  type: Run
-                  name: Run_2
-                  identifier: Run_2
-                  spec:
-                    shell: Sh
-                    command: ls
