@@ -98,3 +98,7 @@ pipeline:
                 - AllErrors
               action:
                 type: Abort
+        strategy:
+          repeat:
+            times: 6
+            maxConcurrency: 3
