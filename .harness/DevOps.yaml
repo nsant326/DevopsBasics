@@ -97,4 +97,4 @@ pipeline:
           - onFailure:
               errors: []
               action:
-                type: StageRollback
+                type: Ignore
