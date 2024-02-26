@@ -76,20 +76,22 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Command
-                  name: Command_1
-                  identifier: Command_1
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
                   spec:
-                    onDelegate: false
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |-
+                          ls
+                          cd /
+                          ls 
+                          cd opt
                     environmentVariables: []
                     outputVariables: []
-                    commandUnits:
-                      - identifier: copy_artifact
-                        name: copy artifact
-                        type: Copy
-                        spec:
-                          sourceType: Artifact
-                          destinationPath: /opt/tomcat/webapps
                   timeout: 10m
             rollbackSteps: []
         tags: {}
