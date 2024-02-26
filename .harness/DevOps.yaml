@@ -100,5 +100,4 @@ pipeline:
                 type: Abort
         strategy:
           repeat:
-            times: 6
-            maxConcurrency: 3
+            times: 1
