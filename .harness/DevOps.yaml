@@ -41,7 +41,7 @@ pipeline:
                     connectorRef: awsconnector
                     region: eu-north-1
                     bucket: aws32bucket1
-                    sourcePath: /root/.m2/repository/com/mandhi/webapp/1/webapp-1.war
+                    sourcePath: /harness/target/webapp-1.war
             "":
               type: S3Upload
               name: S3Upload_1
