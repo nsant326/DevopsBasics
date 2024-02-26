@@ -86,14 +86,27 @@ pipeline:
                     commandUnits:
                       - identifier: copyartifact
                         name: copyartifact
-                        type: Copy
+                        type: DownloadArtifact
                         spec:
-                          sourceType: Artifact
                           destinationPath: /opt/tomcat/webapps
                   timeout: 10m
                   strategy:
                     repeat:
                       items: <+stage.output.hosts>
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: "ls "
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
             rollbackSteps: []
         tags: {}
         failureStrategies:
