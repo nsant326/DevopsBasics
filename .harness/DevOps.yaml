@@ -76,6 +76,26 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: |
+                          sudo su -
+                          cd /
+                          cd opt/tomcat/bin
+                          ./startup.sh
+
+                          docker start ddde2fc7e1a4
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
                   type: Command
                   name: Command_1
                   identifier: Command_1
@@ -86,9 +106,8 @@ pipeline:
                     commandUnits:
                       - identifier: copyartifact
                         name: copyartifact
-                        type: Copy
+                        type: DownloadArtifact
                         spec:
-                          sourceType: Artifact
                           destinationPath: /opt/tomcat/webapps
                   timeout: 10m
             rollbackSteps: []
