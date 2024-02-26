@@ -95,6 +95,7 @@ pipeline:
         tags: {}
         failureStrategies:
           - onFailure:
-              errors: []
+              errors:
+                - AllErrors
               action:
-                type: Ignore
+                type: Abort
