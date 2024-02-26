@@ -100,5 +100,5 @@ pipeline:
                 type: Abort
         strategy:
           repeat:
-            items: <+stage.output.hosts>
+            times: 1
   allowStageExecutions: true
