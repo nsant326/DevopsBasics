@@ -97,7 +97,7 @@ pipeline:
               errors:
                 - AllErrors
               action:
-                type: Abort
+                type: MarkAsFailure
         strategy:
           repeat:
             items: <+stage.output.hosts>
