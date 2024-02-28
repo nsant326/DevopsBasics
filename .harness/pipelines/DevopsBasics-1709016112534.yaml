@@ -47,3 +47,55 @@ pipeline:
             type: Cloud
             spec: {}
         type: CI
+    - stage:
+        name: "deployment "
+        identifier: deployment
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Ssh
+          service:
+            serviceRef: artifacts
+            serviceInputs:
+              serviceDefinition:
+                type: Ssh
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: deploymentenv
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: deploymentinfra
+          execution:
+            steps:
+              - step:
+                  type: Command
+                  name: Command_1
+                  identifier: Command_1
+                  spec:
+                    onDelegate: false
+                    environmentVariables: []
+                    outputVariables: []
+                    commandUnits:
+                      - identifier: commandstep
+                        name: commandstep
+                        type: DownloadArtifact
+                        spec:
+                          destinationPath: /opt/apache-tomcat-9.0.86/webapps
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        delegateSelectors:
+          - docker-delegate
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: MarkAsFailure
+        strategy:
+          repeat:
+            items: <+stage.output.hosts>
