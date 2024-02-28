@@ -105,6 +105,3 @@ pipeline:
                 - AllErrors
               action:
                 type: MarkAsFailure
-        strategy:
-          repeat:
-            items: <+stage.output.hosts>
