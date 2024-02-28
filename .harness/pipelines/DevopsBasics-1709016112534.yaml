@@ -86,6 +86,15 @@ pipeline:
                         spec:
                           destinationPath: /opt/apache-tomcat-9.0.86/webapps
                   timeout: 10m
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: MarkAsFailure
+                  strategy:
+                    repeat:
+                      items: <+stage.output.hosts>
             rollbackSteps: []
         tags: {}
         delegateSelectors:
