@@ -11,42 +11,11 @@ pipeline:
         repoName: nsant326/DevopsBasics
   stages:
     - stage:
-        identifier: build
         name: build
-        spec:
-          cloneCodebase: true
-          execution:
-            steps:
-              - step:
-                  identifier: echo
-                  name: echo
-                  spec:
-                    command: echo hello world
-                  timeout: ""
-                  type: Run
-              - step:
-                  type: Run
-                  name: Run_2
-                  identifier: Run_2
-                  spec:
-                    shell: Sh
-                    command: mvn clean install
-              - step:
-                  type: S3Upload
-                  name: S3Upload_1
-                  identifier: S3Upload_1
-                  spec:
-                    connectorRef: aswconnector
-                    region: ap-south-1
-                    bucket: niranjanawsbucket
-                    sourcePath: /harness/target/webapp-1.war
-          platform:
-            os: Linux
-            arch: Amd64
-          runtime:
-            type: Cloud
-            spec: {}
-        type: CI
+        identifier: build
+        template:
+          templateRef: javatesttemplate
+          versionLabel: "1"
     - stage:
         name: "deployment "
         identifier: deployment
